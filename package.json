@@ -1,0 +1,15 @@
+{
+  "name": "kattis.runner",
+  "version": "1.0.0",
+  "description": "Kattis javascript helper",
+  "main": "src/main.js",
+  "author": "christian.svensson.89@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csvn/kattis.runner.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
