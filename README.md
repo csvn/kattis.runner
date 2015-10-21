@@ -10,15 +10,21 @@ Easily test kattis solutions in node.
 ## Setup
 1. Clone repo with git
 
+    ```
     git clone https://github.com/csvn/kattis.runner.git
+    ```
 
 2. Install npm packages
 
+    ```
     npm Install
+    ```
 
 3. Run node, optionally with gulp
 
+    ```
     gulp run
+    ```
 
 There are 3 gulp tasks:
 
