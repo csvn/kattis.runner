@@ -6,8 +6,8 @@ var ioSets = require('./io-sets'),
 console.log(' # Testing solution');
 ioSets.input.forEach(function(inputs, i) {
   var duration,
-      ix = -1,
       result = '',
+      readIndex = -1,
       addNewline = false,
       start = Date.now(),
       output = ioSets.output[i];
@@ -18,13 +18,14 @@ ioSets.input.forEach(function(inputs, i) {
     solution(readline, print, putstr);
     logEnd();
 
-    try {
-      if (compareResult()) {
+    if (typeof output === 'string') {
+      result = result.replace(/\n$/, '');
+      if (output !== result) {
+        log(' # Failure!');
+        log(`\n # Did not match expected output: \n${output}`);
+      } else {
         log(' # Success!');
       }
-    } catch (e) {
-      log(' # Failure!');
-      log(`\n # Did not match expected output: \n${output}`);
     }
 
   } catch (e) {
@@ -46,9 +47,10 @@ ioSets.input.forEach(function(inputs, i) {
     log(`${prefix} after ${duration}s`);
   }
 
+
   function readline() {
-    ix++;
-    return inputs[ix];
+    readIndex++;
+    return inputs[readIndex];
   }
 
   function print(str) {
@@ -61,19 +63,6 @@ ioSets.input.forEach(function(inputs, i) {
     result += str;
     addNewline = true;
     process.stdout.write(str);
-  }
-
-  function compareResult() {
-    if (typeof output !== 'string') {
-      return false;
-    }
-
-    result = result.replace(/\n$/, '');
-    if (output !== result) {
-      throw new Error();
-    }
-
-    return true;
   }
 
 });
