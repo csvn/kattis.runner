@@ -1,14 +1,21 @@
-module.exports = function(readline, print) {
+module.exports = function(readline, print, putstr) {
+  /**
+   * readline, print and putstr is provided by kattis
+   *
+   * print is with newline suffix
+   * putstr is without newline suffix
+   */
 
   /* SOLUTION START - This part should be submitted to kattis */
-  var index = 0,
-      growth = Math.random() * 0.5 + 0.75;
 
-  while (index < 1000000000) {
-    index += growth;
+  var line;
+
+  while (typeof (line = readline()) !== 'undefined') {
+    print(line);
   }
 
-  print(readline());
+  putstr('These two lines will ');
+  putstr('be on the same row');
 
   /* SOLUTION END */
 };

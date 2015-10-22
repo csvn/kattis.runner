@@ -8,7 +8,7 @@ gulp.task('watch', function() {
 
 gulp.task('run', function() {
   delete require.cache[require.resolve('./src/main')];
+  delete require.cache[require.resolve('./src/io-sets')];
   delete require.cache[require.resolve('./src/solution')];
-  delete require.cache[require.resolve('./src/input-sets')];
   require('./src/main');
 });
