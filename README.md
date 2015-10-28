@@ -30,7 +30,7 @@ Easily test kattis solutions in node or browser.
 2. Install npm packages
 
     ```
-    npm Install
+    npm install
     ```
 
 3. Run node, optionally with gulp
