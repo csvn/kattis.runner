@@ -1,14 +1,19 @@
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    exec = require('child_process').exec;
 
 gulp.task('default', ['run', 'watch']);
 
-gulp.task('watch', function() {
-  gulp.watch('./src/*.js', ['run']);
+gulp.task('watch', () => {
+  gulp.watch('./solution/*.js', ['run']);
 });
 
-gulp.task('run', function() {
-  delete require.cache[require.resolve('./src/main')];
-  delete require.cache[require.resolve('./src/io-sets')];
-  delete require.cache[require.resolve('./src/solution')];
-  require('./src/main');
+gulp.task('run', done => {
+  exec('node src/main.js', function(err, stdout) {
+    if (err) {
+      throw err;
+    }
+
+    console.log(stdout);
+    done();
+  });
 });
