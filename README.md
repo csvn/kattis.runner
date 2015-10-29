@@ -52,14 +52,14 @@ There are 3 gulp tasks:
 ## Solution
 
 #### `solution.js`
-Write all your solution code in `solution/solution.js`. When you have your gulp task up and running, a file that can be submitted directly to kattis will be generated and placed in `solution/solution-submit.js`.
+Write all your solution code in `solution/solution.js`. When you have your gulp task up and running, a file that can be submitted directly to kattis will be generated and placed in `solution/submission.js`.
 
 #### `io-sets.js`
 `solution/io-sets.js` contains groups of inputs, and groups of expected output to check your solution against. Set output to a non-string to not compare the result with the expected output.
 
 ### Tips
 * Write your solution in es5 friendly code (see notes)
-* Use default gulp task, and submit `solution-submit.js` when you're satisfied
+* Use default gulp task, and submit `submission.js` when you're satisfied
 
 
 ## Notes

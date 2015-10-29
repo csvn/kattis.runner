@@ -12,8 +12,8 @@ let main = require('./src/main'),
 let config = {
   j: './index.jade',
   s: './solution/solution.js',
-  js: ['./solution/*.js', './index.jade'],
-  d: './dist'
+  sd: './solution',
+  js: ['./solution/*.js', './index.jade']
 };
 
 gulp.task('default', ['browser', 'watch']);
@@ -60,6 +60,6 @@ function submit() {
     .pipe(replace(/\/\* SOLUTION END[\s\S]+/, ''))
     .pipe(replace(/^[\n\r]+/, ''))
     .pipe(replace(/[\n\r]+$/, '\n'))
-    .pipe(rename({ suffix: '-submit' }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(rename({ basename: 'submission' }))
+    .pipe(gulp.dest(config.sd));
 }
