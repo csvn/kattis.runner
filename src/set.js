@@ -12,7 +12,7 @@ module.exports = class Set {
 
     this.emitter.on('init', () => this.start = Date.now());
     this.emitter.on('print', str => this.output += str);
-    this.emitter.on('error', () => this.finished());
+    this.emitter.on('error', err => this.finished(err));
     this.emitter.on('completed', () => this.finished());
   }
 
@@ -24,7 +24,8 @@ module.exports = class Set {
     return this.expected === this.output.replace(/\n$/, '');
   }
 
-  finished() {
+  finished(err) {
+    this.error = err;
     this.duration = (Date.now() - this.start) / 1000;
   }
 

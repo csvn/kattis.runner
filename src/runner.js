@@ -1,23 +1,31 @@
 'use strict';
 
+const ioSetsPath = '../solution/io-sets',
+      solutionPath = '../solution/solution';
+
 let Set = require('./set'),
-    EventEmitter = require('events'),
-    ioSets = require('../solution/io-sets'),
-    solution = require('../solution/solution');
+    EventEmitter = require('events');
 
 
 let runner = new EventEmitter();
 
 runner.on('run', () => {
+  delete require.cache[require.resolve(ioSetsPath)];
+  delete require.cache[require.resolve(solutionPath)];
+
+  let sets = [];
+  let ioSets = require(ioSetsPath);
+
   ioSets.input.forEach(function(inputs, i) {
     let readIndex = -1,
         set = new Set(inputs, ioSets.output[i]);
 
+    sets.push(set);
     runner.emit('set', set);
 
     try {
       set.emit('init');
-      solution(readline, print, putstr);
+      require(solutionPath)(readline, print, putstr);
       set.emit('completed');
     } catch (e) {
       set.emit('error', e);
@@ -38,6 +46,8 @@ runner.on('run', () => {
     }
 
   });
+
+  runner.emit('completed', sets);
 });
 
 module.exports = runner;

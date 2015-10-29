@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title kattis.runner
+
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    style.
+      .panel, .navbar { margin-bottom: 32px; }
+      .container { max-width: 680px; }
+      .input { display: none; }
+      .input.show { display: block; }
+  body
+    nav.navbar.navbar-default
+      .container
+        .navbar-header
+          a.navbar-brand kattis.runner
+    .container
+      each set, index in sets
+        .panel.panel-default
+          .panel-heading
+            button.btn.btn-info.btn-xs.pull-right(style='margin-top: -3px;') View input
+            h2.panel-title= 'Results for input set #' + (index + 1)
+          .panel-body
+            .input
+              h4 Input
+              pre.alert.alert-info= set.input.join('\n')
+            
+            if set.error
+              pre.alert.alert-danger= set.error.stack
+          
+            h4 Output
+            pre= set.output
+          
+            if !set.matches()
+              p Output did <strong>not</strong> match <strong>expected</strong>:
+              pre.alert.alert-warning= set.expected
+            
+    script.
+      var panels = document.querySelectorAll('.panel');
+      
+      [].forEach.call(panels, function(p) {
+        p.querySelector('button')
+          .addEventListener('click', function() {
+            p.querySelector('.input').classList.toggle('show');
+          });
+      });
