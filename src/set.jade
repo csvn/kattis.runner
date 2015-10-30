@@ -1,0 +1,19 @@
+.panel.panel-default.fade
+  .panel-heading
+    - var dur = set.duration.toFixed(3);
+    button.btn.btn-info.btn-xs.pull-right(style='margin-top: -3px;') View input
+    h2.panel-title Input set ##{set.index} &ndash; <strong style="font-size: .9em;">#{dur}s</strong>
+  .panel-body
+    .input
+      h4 Input
+      pre.alert.alert-info= set.input.join('\n')
+    
+    if set.error
+      pre.alert.alert-danger= set.error.stack
+  
+    h4 Output
+    pre= set.output
+  
+    if !set.matches()
+      p Output did <strong>not</strong> match <strong>expected</strong>:
+      pre.alert.alert-warning= set.expected

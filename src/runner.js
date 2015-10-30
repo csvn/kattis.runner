@@ -1,8 +1,5 @@
 'use strict';
 
-const ioSetsPath = '../solution/io-sets',
-      solutionPath = '../solution/solution';
-
 let Set = require('./set'),
     EventEmitter = require('events');
 
@@ -10,44 +7,60 @@ let Set = require('./set'),
 let runner = new EventEmitter();
 
 runner.on('run', () => {
-  delete require.cache[require.resolve(ioSetsPath)];
-  delete require.cache[require.resolve(solutionPath)];
+  if (require.resolve) {
+    delete require.cache[require.resolve('../solution/io-sets')];
+    delete require.cache[require.resolve('../solution/solution')];
+  }
 
   let sets = [];
-  let ioSets = require(ioSetsPath);
+  let ioSets = require('../solution/io-sets'),
+      solution = require('../solution/solution');
 
-  ioSets.input.forEach(function(inputs, i) {
-    let readIndex = -1,
-        set = new Set(inputs, ioSets.output[i]);
+  recursiveRun(0);
 
-    sets.push(set);
-    runner.emit('set', set);
+  function recursiveRun(index) {
+    let inputs = ioSets.input[index],
+        output = ioSets.output[index];
 
-    try {
-      set.emit('init');
-      require(solutionPath)(readline, print, putstr);
-      set.emit('completed');
-    } catch (e) {
-      set.emit('error', e);
-    }
+    setTimeout(function() {
+      let readIndex = -1,
+          set = new Set(inputs, output);
+
+      sets.push(set);
+      runner.emit('set', set);
+
+      try {
+        set.emit('init');
+        solution(readline, print, putstr);
+      } catch (e) {
+        set.emit('error', e);
+      } finally {
+        set.emit('completed');
+      }
+
+      let next = index + 1;
+      if (next < ioSets.input.length) {
+        recursiveRun(next);
+      } else {
+        runner.emit('completed', sets);
+      }
 
 
-    function readline() {
-      readIndex++;
-      return inputs[readIndex];
-    }
+      function readline() {
+        readIndex++;
+        return inputs[readIndex];
+      }
 
-    function print(str) {
-      set.emit('print', `${str}\n`);
-    }
+      function print(str) {
+        set.emit('print', `${str}\n`);
+      }
 
-    function putstr(str) {
-      set.emit('print', str);
-    }
+      function putstr(str) {
+        set.emit('print', str);
+      }
+    }, 20);
+  }
 
-  });
-
-  runner.emit('completed', sets);
 });
 
 module.exports = runner;
