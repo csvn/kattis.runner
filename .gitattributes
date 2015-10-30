@@ -1,0 +1,49 @@
+* text=auto
+
+## Source code
+*.js text
+*.ts text
+*.coffee text
+
+*.css text
+*.less text
+*.sass text
+*.scss text
+
+*.dot text
+*.htm text
+*.html text
+*.jade text
+
+*.json text
+*.yaml text
+*.yml text
+*.svg text
+*.txt text
+
+## Git
+.gitattributes text
+.gitignore text
+.gitconfig text
+
+## Config files
+.npmignore
+.editorconfig text
+.eslintrc text
+.bowerrc text
+
+## Documentation
+*.md text
+*.markdown text
+AUTHORS text
+LICENSE text
+
+## Binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mp3 binary
+*.eot binary
+*.woff binary
