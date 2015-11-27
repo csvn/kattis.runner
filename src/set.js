@@ -10,10 +10,10 @@ module.exports = class Set {
     this.expected = expected;
     this.emitter = new EventEmitter();
 
-    this.emitter.on('init', () => this.start = Date.now());
-    this.emitter.on('print', str => this.output += str);
-    this.emitter.on('error', err => this.error = err);
-    this.emitter.on('completed', () => {
+    this.on('init', () => this.start = Date.now());
+    this.on('print', str => this.output += str);
+    this.on('error', err => this.error = err);
+    this.on('completed', () => {
       this.duration = (Date.now() - this.start) / 1000;
     });
   }

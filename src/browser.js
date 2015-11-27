@@ -14,6 +14,7 @@ runner.on('set', set => {
   set.index = index;
   content.appendChild(div);
 
+  set.on('error', err => console.error(err.stack || err));
   set.on('completed', () => render(div, set));
 });
 
