@@ -57,7 +57,8 @@ function setupBundle() {
   let conf = Object.assign({
     debug: true,
     entries: './src/browser.js',
-    paths: ['./solution']
+    paths: ['./solution'],
+    noParse: ['./solution/io-sets.js']
   }, watchify.args);
 
   return bundle.call(
