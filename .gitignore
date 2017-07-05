@@ -2,3 +2,5 @@ node_modules
 
 src/bundle.js*
 solution/submission.js
+
+.DS_Store
