@@ -6,6 +6,7 @@ let main = require('./src/main'),
     rename = require('gulp-rename'),
     replace = require('gulp-replace'),
     sourcemaps = require('gulp-sourcemaps'),
+    babel = require('gulp-babel'),
     jadeify = require('jadeify'),
     babelify = require('babelify'),
     watchify = require('watchify'),
@@ -49,6 +50,7 @@ function submit() {
     .pipe(replace(/\/\* SOLUTION END[\s\S]+/, ''))
     .pipe(replace(/^[\n\r]+/, ''))
     .pipe(replace(/[\n\r]+$/, '\n'))
+    .pipe(babel({ presets: ['es2015'] }))
     .pipe(rename({ basename: 'submission' }))
     .pipe(gulp.dest(config.sd));
 }

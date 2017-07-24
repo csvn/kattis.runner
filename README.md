@@ -58,9 +58,8 @@ Write all your solution code in `solution/solution.js`. When you have your gulp 
 `solution/io-sets.js` contains groups of inputs, and groups of expected output to check your solution against. Set output to a non-string to not compare the result with the expected output.
 
 ### Tips
-* Write your solution in es5 friendly code (see notes)
 * Use default gulp task, and submit `submission.js` when you're satisfied
 
 
 ## Notes
-Kattis uses a SpiderMonkey engine version (C24.2.0) that is roughly the version that was used in browser Firefox v24. This means that care needs to be taken when using e.g. array methods which may not be present in the engine. This is most easily noticed on es6 features.
+Kattis uses a SpiderMonkey engine version (C24.2.0) that is roughly the version that was used in browser Firefox v24. This means that care needs to be taken when using e.g. array methods which may not be present in the engine.
